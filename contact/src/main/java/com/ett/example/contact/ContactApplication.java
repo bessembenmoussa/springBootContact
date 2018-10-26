@@ -3,6 +3,8 @@ package com.ett.example.contact;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,14 +12,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ett.example.contact.dao.ContactRepository;
 import com.ett.example.contact.entities.Contact;
+import com.ett.example.contact.storage.StorageServices;
 
 @SpringBootApplication
 public class ContactApplication implements CommandLineRunner{
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Resource
+	StorageServices storageService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ContactApplication.class, args);
+		
 	}
 
 	@Override
@@ -30,6 +37,8 @@ public class ContactApplication implements CommandLineRunner{
 		contactRepository.findAll().forEach(c ->{
 			System.out.println(c.getNom());
 		});
+		storageService.deleteAll();
+		storageService.init();
 		
 
 	}
