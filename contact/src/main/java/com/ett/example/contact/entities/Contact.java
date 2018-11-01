@@ -4,10 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 @Entity
 public class Contact implements Serializable{
 	
@@ -20,6 +26,8 @@ private Date dateNaissance;
 private String email;
 private long tel;
 private String photo;
+@ManyToOne(fetch = FetchType.EAGER)
+private Category category;
 
 public Contact() {
 	super();
@@ -35,6 +43,17 @@ public Contact(String nom, String prenom, Date dateNaissance, String email, long
 	this.photo = photo;
 }
 
+
+public Contact(String nom, String prenom, Date dateNaissance, String email, long tel, String photo, Category category) {
+	super();
+	Nom = nom;
+	Prenom = prenom;
+	this.dateNaissance = dateNaissance;
+	this.email = email;
+	this.tel = tel;
+	this.photo = photo;
+	this.category = category;
+}
 public Long getId() {
 	return id;
 }
@@ -78,6 +97,7 @@ public String getPhoto() {
 public void setPhoto(String photo) {
 	this.photo = photo;
 }
+
 
 
 
