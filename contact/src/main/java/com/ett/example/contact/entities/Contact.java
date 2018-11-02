@@ -98,6 +98,11 @@ public void setPhoto(String photo) {
 	this.photo = photo;
 }
 
+public void setCategory(Category category) {
+	this.category = category;
+}
+
+
 
 
 
